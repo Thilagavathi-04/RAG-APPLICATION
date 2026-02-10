@@ -1,0 +1,26 @@
+[project]
+name = "rag"
+version = "0.1.0"
+description = "PDF-based RAG application"
+readme = "README.md"
+requires-python = ">=3.10,<3.12"
+
+dependencies = [
+    "docx>=0.2.4",
+    "faiss-cpu>=1.8.0,<2.0",
+    "fastapi>=0.110,<1.0",
+    "google-generativeai>=0.8.6",
+    "inngest>=0.5,<1.0",
+    "llama-index-core>=0.10,<0.15",
+    "llama-index-readers-file>=0.1,<0.6",
+    "numpy>=1.26,<2.0",
+    "ollama>=0.6.1",
+    "openai>=1.0.0,<2.0",
+    "pandas>=2.0,<3.0",
+    "pypdf>=4.0,<6.0",
+    "pypdf2>=3.0.1",
+    "python-dotenv>=1.0,<2.0",
+    "qdrant-client>=1.8,<2.0",
+    "streamlit>=1.30,<2.0",
+    "uvicorn>=0.23,<1.0",
+]
