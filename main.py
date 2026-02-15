@@ -114,11 +114,26 @@ def build_faiss_index(pdf_path):
     # Create progress bar
     progress_bar = st.progress(0)
     status_text = st.empty()
+    time_text = st.empty()
     
+    chunk_start = time.time()
     for i, chunk in enumerate(chunks):
-        status_text.text(f"Processing chunk {i+1}/{len(chunks)}...")
+        # Calculate ETA
+        if i > 0:
+            elapsed = time.time() - chunk_start
+            avg_time_per_chunk = elapsed / i
+            remaining_chunks = len(chunks) - i
+            eta_seconds = avg_time_per_chunk * remaining_chunks
+            eta_minutes = eta_seconds / 60
+            
+            status_text.text(f"Processing chunk {i+1}/{len(chunks)}")
+            time_text.text(f"⏱️ ETA: {eta_minutes:.1f} minutes remaining")
+        else:
+            status_text.text(f"Processing chunk {i+1}/{len(chunks)}...")
+        
         progress_bar.progress((i + 1) / len(chunks))
-        print(f"Processing chunk {i+1}/{len(chunks)}...")  # Progress feedback
+        print(f"Processing chunk {i+1}/{len(chunks)}...")
+        
         emb = get_embeddings(chunk)
         vectors.append(emb)
         chunks_store.append(chunk)
@@ -128,7 +143,12 @@ def build_faiss_index(pdf_path):
 
     progress_bar.empty()
     status_text.empty()
-    print("Index building complete!")
+    time_text.empty()
+    
+    total_time = time.time() - start_time
+    print(f"Index building complete! Total time: {total_time/60:.2f} minutes")
+    st.success(f"✅ Indexing complete! ({total_time/60:.1f} minutes)")
+    
     return index, chunks_store
 
 
@@ -199,10 +219,8 @@ st.sidebar.markdown(f"""
 **Generation Model:** Mistral 7B  
 **Chunk Size:** 1500 characters  
 **Overlap:** 150 characters  
-**Hardware:** Intel i5-2050 (CPU)  
 **Embedding Dim:** 768
 
-**Est. Time (500pg PDF):** ~30 minutes ⚡
 """)
 
 # Option to upload file or use existing
