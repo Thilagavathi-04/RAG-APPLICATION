@@ -1,4 +1,4 @@
-# 📄 Mistral 7B RAG App (Local)
+# 📄 Mistral 7B RAG App (Local) 
 
 A **Retrieval-Augmented Generation (RAG)** application that allows you to ask questions about documents using locally-run Mistral 7B model via Ollama.
 
