@@ -204,17 +204,4 @@ To clear the conversation and start fresh:
 - [ ] Support for other document formats (DOCX, TXT, etc.)
 - [ ] Adjustable model parameters (temperature, top_k, etc.)
 
-## 📝 License
-
-This project is open source and available under the MIT License.
-
-## 🤝 Contributing
-
-Feel free to submit issues, fork the repository, and create pull requests for any improvements.
-
-## 📧 Support
-
-For issues or questions, please create an issue in the repository.
-
----
 
